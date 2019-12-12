@@ -1,25 +1,23 @@
 require 'directors_database'
 
-def directors_totals(nds)
-  gross_totals = {}
+def directors_totals(source)
+  result = {}
   director_index = 0
-
-  while director_index < nds.length do
-    director = nds[director_index]
-    gross_totals[director[:name]] = gross_for_director(director)
+  while director_index < source.size do
+    director = source[director_index]
+    result[director[:name]] = gross_for_director(director)
     director_index += 1
   end
-  gross_totals
+  result
 end
-    
 
-def gross_for_director(director_data)
-  grand_total = 0 
-  counter = 0 
-  while counter < director_data[:movies].length do 
-    grand_total += director_data[:movies][counter][:worldwide_gross]
-    counter += 1 
+def gross_for_director(d)
+  total = 0
+  index = 0
+
+  while index < d[:movies].length do
+    total += d[:movies][index][:worldwide_gross]
+    index += 1
   end
-  grand_total
+  total
 end
-
